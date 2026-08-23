@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact & Location | Turikumwe Charity Organisation</title>
-<meta name="description" content="Get in touch with Turikumwe Charity Organisation in Kasangati, Uganda. Call, email, or visit us — and find out how to donate, volunteer or partner with us.">
+<meta name="description" content="Get in touch with Turikumwe Charity Organisation in Kasangati, Uganda. Call, email, or visit us, and find out how to donate, volunteer or partner with us.">
 <link rel="icon" href="images/logo.png">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -32,13 +32,32 @@
     </div>
   </div>
 </header>
+<div class="nav-backdrop" id="navBackdrop"></div>
+<nav class="mobile-nav" id="mobileNav">
+      <div class="nav-drawer-head">
+        <a href="index.html" class="brand">
+          <img src="images/logo.png" alt="Turikumwe Charity Organisation logo">
+          <span class="brand-word"><b>Turikumwe</b><span>Charity Organisation</span></span>
+        </a>
+        <button class="nav-drawer-close" type="button" aria-label="Close menu">&times;</button>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html#location">Location</a></li>
+      </ul>
+      <a href="contact.html#form" class="btn btn-dark">Get Involved<span class="arrow">&rarr;</span></a>
+</nav>
 
 <section class="page-hero">
   <img src="images/site/contact-hero.jpg" alt="Women and children from the Turikumwe community gathered together">
   <div class="page-hero-inner container">
     <div class="breadcrumb"><a href="index.html">Home</a> / <span>Contact &amp; Location</span></div>
     <h1>Let's talk. Every question moves us closer, together.</h1>
-    <p>Whether you want to donate, volunteer, book the dance troupe or simply learn more — we'd love to hear from you.</p>
+    <p>Whether you want to donate, volunteer, book the dance troupe or simply learn more, we'd love to hear from you.</p>
   </div>
 </section>
 
@@ -68,7 +87,7 @@
           <div><b>Visit / Post</b><span>P.O. Box 100100, Kasangati, Uganda</span></div>
         </div>
         <div class="info-line">
-          <div><b>Office Hours</b><span>Mon – Fri, 8:30am – 5:00pm · Sat 9:00am – 1:00pm</span></div>
+          <div><b>Office Hours</b><span>Mon to Fri, 8:30am to 5:00pm &middot; Sat 9:00am to 1:00pm</span></div>
         </div>
         <div class="info-line">
           <div><b>Website</b><a href="https://www.turikumwe.org" target="_blank" rel="noopener">www.turikumwe.org</a></div>
@@ -79,7 +98,6 @@
         <a href="#" style="background:var(--navy); color:#fff;" aria-label="Facebook">Facebook</a>
         <a href="#" style="background:var(--navy); color:#fff;" aria-label="Instagram">Instagram</a>
         <a href="#" style="background:var(--navy); color:#fff;" aria-label="YouTube">YouTube</a>
-        <a href="#" style="background:var(--navy); color:#fff;" aria-label="WhatsApp">WhatsApp</a>
       </div>
     </div>
 
@@ -117,7 +135,7 @@
           <textarea id="fmsg" name="fmsg" rows="5" placeholder="Tell us a little more…" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;">Send Message<span class="arrow">→</span></button>
-        <p class="form-note">We typically reply within 1–2 business days. For urgent safety concerns, please call us directly.</p>
+        <p class="form-note">We typically reply within 1 to 2 business days. For urgent safety concerns, please call us directly.</p>
         <p id="formStatus"></p>
       </form>
     </div>
@@ -131,7 +149,7 @@
     <div class="center" style="max-width:620px;">
       <span class="eyebrow">Find us</span>
       <h2 class="section-title" style="margin-top:14px;">Our home in <em>Kasangati</em></h2>
-      <p class="section-lede center">We welcome visitors, partners and volunteers — come see the workshops, the piggery pens, and maybe catch a rehearsal.</p>
+      <p class="section-lede center">We welcome visitors, partners and volunteers, come see the workshops, the piggery pens, and maybe catch a rehearsal.</p>
     </div>
     <div class="map-wrap reveal">
       <iframe src="https://www.google.com/maps?q=Kasangati,Uganda&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Turikumwe Charity Organisation location in Kasangati, Uganda"></iframe>
@@ -145,8 +163,13 @@
     <div class="reveal">
       <span class="eyebrow">Good to know</span>
       <h2 class="section-title" style="margin-top:14px;">Frequently asked <em>questions</em></h2>
-      <p class="section-lede">Still curious about something? Reach out — we're always happy to talk it through.</p>
-      <img src="images/site/contact-faq.jpg" alt="School girls we support, receiving school uniforms" style="margin-top:30px;border-radius:var(--radius);box-shadow:var(--shadow-card);width:100%;aspect-ratio:4/3;object-fit:cover;">
+      <p class="section-lede">Still curious about something? Reach out, we're always happy to talk it through.</p>
+      <div class="faq-slideshow reveal" style="margin-top:30px;">
+        <img src="images/site/contact-faq.jpg" class="is-active" alt="School girls we support, receiving school uniforms">
+        <img src="images/site/women-deep.jpg" alt="Girls and women celebrating a pad distribution drive">
+        <img src="images/site/program-kids.jpg" alt="Our children's dance troupe performing at a community event">
+        <img src="images/site/card-savings.jpg" alt="A savings and business training circle meeting outdoors">
+      </div>
     </div>
     <div class="reveal">
       <div class="faq-item open">
@@ -155,19 +178,19 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">Can I visit a training session in person?<span class="faq-toggle">+</span></div>
-        <div class="faq-a"><p>Yes — we welcome visitors during office hours. Please contact us ahead of time so we can plan a session that's ready to show you around.</p></div>
+        <div class="faq-a"><p>Yes, we welcome visitors during office hours. Please contact us ahead of time so we can plan a session that's ready to show you around.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How do I book the children's dance troupe for an event?<span class="faq-toggle">+</span></div>
         <div class="faq-a"><p>Send us your event date, location and details through the contact form and our coordinator will confirm availability and any performance fee that supports the children's program.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">I need help — is your domestic violence support confidential?<span class="faq-toggle">+</span></div>
+        <div class="faq-q">I need help, is your domestic violence support confidential?<span class="faq-toggle">+</span></div>
         <div class="faq-a"><p>Yes. Our safe-space circles and counselling referrals are handled with care and discretion. Please call us directly, and we will guide you to the right support.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Can organisations or churches partner with Turikumwe?<span class="faq-toggle">+</span></div>
-        <div class="faq-a"><p>Absolutely — we work with local partners on training, outreach and funding. Reach out and let's explore what a partnership could look like.</p></div>
+        <div class="faq-a"><p>Absolutely, we work with local partners on training, outreach and funding. Reach out and let's explore what a partnership could look like.</p></div>
       </div>
     </div>
   </div>

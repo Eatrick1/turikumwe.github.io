@@ -126,6 +126,7 @@ button{ font-family: inherit; cursor:pointer; }
 .nav-toggle.open span{ background: transparent; }
 .nav-toggle.open span::before{ top:0; transform: rotate(45deg); }
 .nav-toggle.open span::after{ top:0; transform: rotate(-45deg); }
+.mobile-nav, .nav-backdrop{ display:none; }
 
 /* (decorative stitch divider removed) */
 
@@ -419,27 +420,39 @@ button{ font-family: inherit; cursor:pointer; }
 
 /* ---------------------------------- LIGHTBOX ---------------------------------- */
 .lightbox{
-  position:fixed; inset:0; z-index:200; background: rgba(12,13,20,.94);
+  position:fixed; inset:0; z-index:1300; background:#0b0c14;
   display:flex; align-items:center; justify-content:center; flex-direction:column;
   opacity:0; visibility:hidden; transition: opacity .25s ease;
-  padding: 60px 20px;
+  padding: 60px 20px; height:100vh; height:100dvh;
 }
 .lightbox.is-open{ opacity:1; visibility:visible; }
-.lightbox img{ max-width:min(1100px,92vw); max-height:76vh; object-fit:contain; border-radius:10px; box-shadow:0 30px 60px rgba(0,0,0,.5); }
-.lightbox-cap{ color:#fff; font-size:.92rem; margin-top:16px; opacity:.85; text-align:center; }
+.lightbox img{ max-width:min(1100px,88vw); max-height:74vh; object-fit:contain; border-radius:10px; box-shadow:0 30px 60px rgba(0,0,0,.5); }
+.lightbox-cap{ color:#fff; font-size:.92rem; margin-top:16px; opacity:.85; text-align:center; padding:0 50px; }
 .lightbox-close{
   position:absolute; top:22px; right:26px; background:none; border:none; color:#fff; font-size:2.2rem; line-height:1;
-  cursor:pointer; font-family: var(--font-display); font-weight:300; transition: opacity .2s;
+  cursor:pointer; font-family: var(--font-display); font-weight:300; transition: opacity .2s; z-index:2;
 }
 .lightbox-close:hover{ opacity:.6; }
 .lightbox-nav{
   position:absolute; top:50%; transform: translateY(-50%); background: rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.3);
   color:#fff; width:46px; height:46px; border-radius:50%; font-size:1.6rem; cursor:pointer; transition:.2s;
-  display:flex; align-items:center; justify-content:center;
+  display:flex; align-items:center; justify-content:center; z-index:2;
 }
 .lightbox-nav:hover{ background: rgba(255,255,255,.22); }
 .lightbox-prev{ left:20px; } .lightbox-next{ right:20px; }
-@media(max-width:640px){ .lightbox-nav{ width:38px; height:38px; font-size:1.3rem; } .lightbox-prev{ left:8px; } .lightbox-next{ right:8px; } .lightbox-close{ top:14px; right:16px; } }
+@media(max-width:640px){
+  .lightbox{ padding: 56px 10px 20px; }
+  .lightbox img{ max-width:78vw; max-height:56vh; }
+  .lightbox-cap{ padding:0 8px; font-size:.82rem; margin-top:12px; }
+  .lightbox-nav{ width:34px; height:34px; font-size:1.2rem; }
+  .lightbox-prev{ left:6px; } .lightbox-next{ right:6px; }
+  .lightbox-close{ top:12px; right:14px; font-size:1.9rem; }
+}
+
+/* ---------------------------------- FAQ AUTO SLIDESHOW ---------------------------------- */
+.faq-slideshow{ position:relative; width:100%; aspect-ratio:4/3; border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow-card); background: var(--cream-2); }
+.faq-slideshow img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition: opacity 1.2s ease; }
+.faq-slideshow img.is-active{ opacity:1; }
 
 /* ---------------------------------- JOIN THE DIFFERENCE (3-card CTA) ---------------------------------- */
 .join-diff{ position:relative; padding: 90px 0; overflow:hidden; }
@@ -495,10 +508,9 @@ button{ font-family: inherit; cursor:pointer; }
 }
 
 @media (max-width: 900px){
-  .main-nav{ display:none; }
   .nav-toggle{ display:flex; }
-  .header-actions .btn span{ display:none; }
-  .header-actions .btn{ padding:11px 14px; }
+  .header-actions .btn{ display:none; }
+  .main-nav{ display:none; }
 
   .story-grid, .two-col, .cta-grid, .testi-grid, .deep-program, .deep-program.reverse{ grid-template-columns:1fr; }
   .deep-program.reverse .deep-media, .deep-program.reverse .deep-text{ order:0; }
@@ -509,14 +521,36 @@ button{ font-family: inherit; cursor:pointer; }
   .mini-list{ grid-template-columns:1fr; }
   .gallery-grid{ grid-template-columns: repeat(3,1fr); }
 
-  /* mobile drawer nav */
-  .main-nav.mobile-open{
-    display:block; position:fixed; inset:0; top:76px; background: var(--cream); z-index:900; padding: 30px 24px;
-    overflow-y:auto;
+  /* mobile drawer nav: slides in from the left. Lives OUTSIDE <header> in the
+     DOM so its stacking order is never trapped inside the header's own
+     stacking context (position:sticky + z-index create one). This is what
+     was blocking taps before. */
+  .nav-backdrop{
+    display:block; position:fixed; inset:0; background: rgba(15,17,28,.55); z-index:1090;
+    opacity:0; visibility:hidden; transition: opacity .3s ease;
   }
-  .main-nav.mobile-open ul{ flex-direction:column; align-items:stretch; gap:6px; }
-  .main-nav.mobile-open a{ display:block; padding:16px 18px; font-size:1.05rem; border-radius:12px; }
-  .main-nav.mobile-open .btn{ margin-top:18px; width:100%; }
+  .nav-backdrop.is-open{ opacity:1; visibility:visible; }
+
+  .mobile-nav{
+    display:block; position:fixed; top:0; left:0; height:100vh; width:min(310px,84vw);
+    background: var(--cream); z-index:1100; padding: 34px 24px 30px; overflow-y:auto;
+    transform: translateX(-100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 24px 0 60px -20px rgba(0,0,0,.35);
+  }
+  .mobile-nav.mobile-open{ transform: translateX(0); }
+  .nav-drawer-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+  .nav-drawer-head .brand{ gap:9px; }
+  .nav-drawer-head .brand img{ width:38px; height:38px; }
+  .nav-drawer-head .brand-word b{ font-size:1rem; }
+  .nav-drawer-close{
+    width:36px; height:36px; border-radius:50%; border:1.5px solid rgba(30,34,51,.18); background:#fff;
+    font-family: var(--font-display); font-size:1.3rem; font-weight:400; color: var(--navy); flex-shrink:0; line-height:1;
+  }
+  .mobile-nav ul{ display:flex; flex-direction:column; align-items:stretch; gap:6px; }
+  .mobile-nav ul a{ display:block; padding:15px 16px; font-size:1.03rem; border-radius:12px; font-weight:600; color: var(--navy); }
+  .mobile-nav ul a:hover{ background: var(--orange-light); color: var(--orange-dark); }
+  .mobile-nav ul a.active{ background: var(--navy); color:#fff; }
+  .mobile-nav > a.btn{ display:inline-flex; margin-top:22px; width:100%; color:#fff; }
 }
 
 @media (max-width: 620px){
@@ -530,7 +564,8 @@ button{ font-family: inherit; cursor:pointer; }
   .hero p.sub{ font-size:1rem; }
   .cta-actions .btn, .hero-cta .btn{ width:100%; }
   .hero-scroll{ display:none; }
-  .footer-top{ grid-template-columns:1fr; padding: 56px 0 30px; }
+  .footer-top{ grid-template-columns: 1fr 1fr; padding: 56px 0 30px; row-gap:36px; }
+  .footer-brand{ grid-column: 1 / -1; }
   .page-hero{ height:340px; }
   .collage .c3{ display:none; }
   .gallery-grid{ grid-template-columns: repeat(2,1fr); gap:12px; }

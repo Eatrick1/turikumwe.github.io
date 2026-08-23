@@ -1,5 +1,5 @@
 // ==========================================================================
-// Shared, constant footer — injected on every page so it never drifts.
+// Shared, constant footer, injected on every page so it never drifts.
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', function () {
   const mount = document.getElementById('footer-include');
@@ -23,12 +23,11 @@ document.addEventListener('DOMContentLoaded', function () {
         <div>
           <b>Turikumwe</b>
           <span class="tagline">It all starts with love</span>
-          <p>A Kasangati-based charity walking with women and children through skills, health, safety and joy — together.</p>
+          <p>A Kasangati-based charity walking with women and children through skills, health, safety and joy, together.</p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook">Facebook</a>
             <a href="#" aria-label="Instagram">Instagram</a>
             <a href="#" aria-label="YouTube">YouTube</a>
-            <a href="#" aria-label="WhatsApp">WhatsApp</a>
           </div>
         </div>
       </div>

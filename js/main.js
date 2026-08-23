@@ -1,5 +1,5 @@
 // ==========================================================================
-// Turikumwe Charity Organisation — main.js
+// Turikumwe Charity Organisation, main.js
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -12,19 +12,48 @@ document.addEventListener('DOMContentLoaded', function () {
     onScroll();
   }
 
-  /* ---------- mobile nav toggle ---------- */
+  /* ---------- mobile nav toggle (slide-in drawer) ---------- */
   const navToggle = document.querySelector('.nav-toggle');
-  const mainNav = document.querySelector('.main-nav');
-  if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      mainNav.classList.toggle('mobile-open');
-    });
-    mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      navToggle.classList.remove('open');
-      mainNav.classList.remove('mobile-open');
-    }));
+  const mobileNav = document.querySelector('.mobile-nav');
+  const navBackdrop = document.querySelector('.nav-backdrop');
+  const navDrawerClose = document.querySelector('.nav-drawer-close');
+
+  function openNav() {
+    navToggle.classList.add('open');
+    mobileNav.classList.add('mobile-open');
+    if (navBackdrop) navBackdrop.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
   }
+  function closeNav() {
+    navToggle.classList.remove('open');
+    mobileNav.classList.remove('mobile-open');
+    if (navBackdrop) navBackdrop.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener('click', () => {
+      mobileNav.classList.contains('mobile-open') ? closeNav() : openNav();
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    if (navDrawerClose) navDrawerClose.addEventListener('click', closeNav);
+    if (navBackdrop) navBackdrop.addEventListener('click', closeNav);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+  }
+
+  /* ---------- auto-scrolling image slideshows (e.g. FAQ photo) ---------- */
+  document.querySelectorAll('.faq-slideshow').forEach(function (box) {
+    const imgs = box.querySelectorAll('img');
+    if (imgs.length < 2) return;
+    let i = 0;
+    setInterval(function () {
+      imgs[i].classList.remove('is-active');
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add('is-active');
+    }, 3200);
+  });
 
   /* ---------- hero carousel ---------- */
   const slides = document.querySelectorAll('.hero-slide');
@@ -117,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
       status.textContent = 'Sending your message…';
       setTimeout(() => {
         status.style.color = '#1C93A6';
-        status.textContent = 'Thank you! Your message has been received — our team will reach out to you soon.';
+        status.textContent = 'Thank you! Your message has been received, our team will reach out to you soon.';
         form.reset();
       }, 900);
     });
@@ -129,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
     nform.addEventListener('submit', (e) => {
       e.preventDefault();
       const status = document.getElementById('newsletterStatus');
-      if (status) status.textContent = "You're subscribed — thank you for staying close to us!";
+      if (status) status.textContent = "You're subscribed, thank you for staying close to us!";
       nform.reset();
     });
   }
