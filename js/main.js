@@ -43,16 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- auto-scrolling image slideshows (e.g. FAQ photo) ---------- */
-  document.querySelectorAll('.faq-slideshow').forEach(function (box) {
+  /* ---------- auto-scrolling image slideshows (e.g. FAQ photo, page-hero & section backgrounds) ---------- */
+  document.querySelectorAll('.faq-slideshow, .bg-slideshow').forEach(function (box) {
     const imgs = box.querySelectorAll('img');
     if (imgs.length < 2) return;
+    const interval = box.classList.contains('bg-slideshow') ? 5200 : 3200;
     let i = 0;
     setInterval(function () {
       imgs[i].classList.remove('is-active');
       i = (i + 1) % imgs.length;
       imgs[i].classList.add('is-active');
-    }, 3200);
+    }, interval);
   });
 
   /* ---------- hero carousel ---------- */
